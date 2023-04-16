@@ -1,0 +1,43 @@
+quest-items-website/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── itemsController.js
+│   │   └── usersController.js
+│   ├── models/
+│   │   ├── Item.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── items.js
+│   │   └── users.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   └── server.js
+└── frontend/
+    ├── public/
+    │   ├── favicon.ico
+    │   ├── index.html
+    │   └── manifest.json
+    ├── src/
+    │   ├── components/
+    │   │   ├── AdminItemForm.js
+    │   │   ├── Header.js
+    │   │   ├── Item.js
+    │   │   ├── ItemDetailsPage.js
+    │   │   ├── ItemsPage.js
+    │   │   ├── LoginPage.js
+    │   │   └── SignupPage.js
+    │   ├── contexts/
+    │   │   └── AuthContext.js
+    │   ├── services/
+    │   │   ├── api.js
+    │   │   └── auth.js
+    │   ├── App.js
+    │   ├── App.css
+    │   ├── index.js
+    │   └── index.css
+    ├── .gitignore
+    ├── package.json
+    └── README.md
