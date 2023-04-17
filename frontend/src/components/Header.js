@@ -1,23 +1,32 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+
+const useIsActive = (path) => {
+  const match = useMatch(path);
+  return match?.isExact ? 'active-link' : '';
+};
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
+  const homeActive = useIsActive('/');
+  const itemsActive = useIsActive('/items');
+  const loginActive = useIsActive('/login');
+  const signupActive = useIsActive('/signup');
 
   return (
     <header>
       <nav>
         <ul>
           <li>
-            <NavLink exact={true} to="/" activeClassName="active-link">
+            <Link className={homeActive} to="/">
               Home
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink to="/items" activeClassName="active-link">
+            <Link className={itemsActive} to="/items">
               Items
-            </NavLink>
+            </Link>
           </li>
           {user ? (
             <>
@@ -31,14 +40,14 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/login" activeClassName="active-link">
+                <Link className={loginActive} to="/login">
                   Login
-                </NavLink>
+                </Link>
               </li>
               <li>
-                <NavLink to="/signup" activeClassName="active-link">
+                <Link className={signupActive} to="/signup">
                   Signup
-                </NavLink>
+                </Link>
               </li>
             </>
           )}
