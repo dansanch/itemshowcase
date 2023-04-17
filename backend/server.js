@@ -1,44 +1,34 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-
-app.use(express.json());
-
-const allowedOrigins = ['https://willowy-khapse-22f8ea.netlify.app',
-                                   'http://localhost:3000',];
+const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log(err));
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
-const authRoutes = require('./routes/authRoutes');
-const itemsRoutes = require('./routes/itemsRoutes');
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully');
+});
 
-app.use('/api/auth', authRoutes);
-app.use('/api/items', itemsRoutes);
+const itemsRouter = require('./routes/items');
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+app.use('/items', itemsRouter);
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
