@@ -10,7 +10,7 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <NavLink exact to="/" activeClassName="active-link">
+            <NavLink exact={true} to="/" activeClassName="active-link">
               Home
             </NavLink>
           </li>

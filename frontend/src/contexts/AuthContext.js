@@ -1,46 +1,21 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginUser, registerUser, getUser, logoutUser } from '../services/auth';
+import { createContext, useState } from 'react';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userData = await getUser();
-      setUser(userData);
-      setLoading(false);
-    };
-    fetchUser();
-  }, []);
-
-  const login = async (email, password) => {
-    const userData = await loginUser(email, password);
+  const login = (userData) => {
     setUser(userData);
-    navigate('/path');
   };
 
-  const register = async (email, password, username) => {
-    const userData = await registerUser(email, password, username);
-    setUser(userData);
-    navigate('/path');
-  };
-
-  const logout = async () => {
-    await logoutUser();
+  const logout = () => {
     setUser(null);
-    navigate('/path');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export { AuthContext, AuthProvider };
