@@ -25,7 +25,8 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-const itemsRouter = require('./routes/items');
+const itemsRouter = require('./quest-items-showcase/routes/items');
+
 
 app.use('/items', itemsRouter);
 
