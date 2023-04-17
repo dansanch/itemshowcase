@@ -1,4 +1,4 @@
-// import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchItems, createItem } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 import ItemCard from './ItemCard';
@@ -32,7 +32,7 @@ const ItemsPage = () => {
     <div>
       <h1>Items</h1> 
 
-     // {user && user.role === 'admin' && (
+      {user && user.role === 'admin' && (
         <button onClick={handleNewItem}>Create New Item</button>
       )}
       <div>
