@@ -1,4 +1,4 @@
-const API_URL = 'https://itemshowcase.herokuapp.com';
+const API_URL = 'https://backend-new.herokuapp.com';
 
 
 export const loginUser = async (email, password) => {

@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://itemshowcase.herokuapp.com';
+const API_BASE_URL = 'https://backend-new.herokuapp.com';
 
 export const fetchItems = async () => {
   const response = await fetch(`${API_BASE_URL}/items`);
