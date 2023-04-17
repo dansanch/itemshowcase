@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const Header = () => {
@@ -10,10 +10,14 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink exact to="/" activeClassName="active-link">
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/items">Items</Link>
+            <NavLink to="/items" activeClassName="active-link">
+              Items
+            </NavLink>
           </li>
           {user ? (
             <>
@@ -27,10 +31,14 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <Link to="/login">Login</Link>
+                <NavLink to="/login" activeClassName="active-link">
+                  Login
+                </NavLink>
               </li>
               <li>
-                <Link to="/signup">Signup</Link>
+                <NavLink to="/signup" activeClassName="active-link">
+                  Signup
+                </NavLink>
               </li>
             </>
           )}
